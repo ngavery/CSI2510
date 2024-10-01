@@ -26,8 +26,13 @@ public class LinkedSequence<E> extends LinkedPositionalList<E> implements Sequen
                  checkIndex(i,size()); // checks whether the given index is in the range [0, size()-1].
 
                  /******* add your code here **********/
+				 Position<E> current = first();
 
-                 return null; //dummy return
+				 for (int j = 0; j < i+1; j++) {
+					current = after(current);
+				 }
+
+                 return current; //dummy return
           } 
 	
       /**
@@ -40,7 +45,18 @@ public class LinkedSequence<E> extends LinkedPositionalList<E> implements Sequen
 	public int indexAtPosition(Position<E> pos) {
 		
                   /******* add your code here **********/
-		 return 0; //dummy return
+		Position<E> current = first();
+		int i = 0;
+
+		while (current != null) {
+			if (current == pos) {
+				return i;
+			}
+			current = after(current);
+			i++;
+		}
+
+		 return -1; //dummy return
 	} 
 
        /**
@@ -52,7 +68,9 @@ public class LinkedSequence<E> extends LinkedPositionalList<E> implements Sequen
 	public E get(int i) throws IndexOutOfBoundsException { // gets element at index i
 		
                  /******* add your code here **********/
-		 return null;
+				 Position<E> pos = positionAtIndex(i);
+
+		 return pos.getElement();
 	}
 	
 	/**
@@ -65,7 +83,13 @@ public class LinkedSequence<E> extends LinkedPositionalList<E> implements Sequen
 	public E set(int i, E e) throws IndexOutOfBoundsException { // replaces the element at index i with e
 
                /******* add your code here **********/
-               return null;
+
+				Position<E> pos = positionAtIndex(i); //Get position at index i
+				E prev = pos.getElement(); //Store current element
+				add(i, e); //Add new element at index i
+				remove(i+1); //Remove previous element
+
+               return prev; //Return previously stored element
 	}
 	
 	/**
@@ -78,7 +102,8 @@ public class LinkedSequence<E> extends LinkedPositionalList<E> implements Sequen
 	  */
 	public void add(int i, E e){ // insert a new element which will have index i 
 		 /******* add your code here **********/
-   
+		 Position<E> prev = positionAtIndex(i-1);
+		 addAfter(prev, e);
 	}
 	
 	/**
