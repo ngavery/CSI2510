@@ -26,6 +26,10 @@ public class LinkedSequence<E> extends LinkedPositionalList<E> implements Sequen
                  checkIndex(i,size()); // checks whether the given index is in the range [0, size()-1].
 
                  /******* add your code here **********/
+				 if (i < 0 || i >= size()) {
+					throw new IndexOutOfBoundsException("Index " + i + " is out of bounds.");
+				}
+
 				 Position<E> current = first();
 
 				 for (int j = 0; j < i+1; j++) {
@@ -68,6 +72,10 @@ public class LinkedSequence<E> extends LinkedPositionalList<E> implements Sequen
 	public E get(int i) throws IndexOutOfBoundsException { // gets element at index i
 		
                  /******* add your code here **********/
+				 if (i < 0 || i >= size()) {
+					throw new IndexOutOfBoundsException("Index " + i + " is out of bounds.");
+				}
+
 				 Position<E> pos = positionAtIndex(i);
 
 		 return pos.getElement();
@@ -83,6 +91,9 @@ public class LinkedSequence<E> extends LinkedPositionalList<E> implements Sequen
 	public E set(int i, E e) throws IndexOutOfBoundsException { // replaces the element at index i with e
 
                /******* add your code here **********/
+			   if (i < 0 || i >= size()) {
+				throw new IndexOutOfBoundsException("Index " + i + " is out of bounds.");
+			}
 
 				Position<E> pos = positionAtIndex(i); //Get position at index i
 				E prev = pos.getElement(); //Store current element
@@ -102,6 +113,10 @@ public class LinkedSequence<E> extends LinkedPositionalList<E> implements Sequen
 	  */
 	public void add(int i, E e){ // insert a new element which will have index i 
 		 /******* add your code here **********/
+		 if (i < 0 || i >= size()) {
+			throw new IndexOutOfBoundsException("Index " + i + " is out of bounds.");
+		}
+
 		 Position<E> prev = positionAtIndex(i-1);
 		 addAfter(prev, e);
 	}
@@ -116,7 +131,15 @@ public class LinkedSequence<E> extends LinkedPositionalList<E> implements Sequen
 	public E remove(int i) throws IndexOutOfBoundsException { // remove element with index i
 
 		/******* add your code here **********/
+		if (i < 0 || i >= size()) {
+			throw new IndexOutOfBoundsException("Index " + i + " is out of bounds.");
+		}
+		Position<E> pos = positionAtIndex(i);
+		E element = getElement(pos);
 
+		for (int j = i; j < size(); j++) {
+
+		}
                 E el=null;    // dummy commands to be removed 
                 return el; // dummy commands to be removed
 	}
